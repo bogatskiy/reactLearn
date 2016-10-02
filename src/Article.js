@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 
 export default class Article extends Component {
 
-    state = {
-        opened: {
-            a: true
-        }
+    static propTypes = {
+      article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+      })
     }
+
 
     render() {
         const { article, isOpen, openArticle } = this.props
@@ -21,30 +23,4 @@ export default class Article extends Component {
             </div>
         )
     }
-
-    toggleOpen = ev => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-/*
-
-        this.setState({
-            opened: {...this.state.opened, a: false}
-        })
-*/
-    }
 }
-
-
-
-/*
-export default (props) => {
-    const { article } = props
-
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <section>{article.text}</section>
-        </div>
-    )
-}*/
