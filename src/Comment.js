@@ -1,16 +1,19 @@
-import React from 'react'
-import CommentList from './CommentList'
+import React, { PropTypes } from 'react'
 
-export default (props) => {
-    const { comment } = props
-
-    console.log(comment);
-
-    var divStyle = {
-  color: 'red'
-};
-
-
-
-    return <div><p style={divStyle}>{comment.user}</p><p>{comment.text}</p></div>
+function Comment(props) {
+    const { text, user } = props.comment
+    return (
+        <p>
+            {text} <strong>by {user}</strong>
+        </p>
+    )
 }
+
+Comment.propTypes = {
+    comment: PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        user: PropTypes.string
+    }).isRequired
+}
+
+export default Comment

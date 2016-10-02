@@ -1,30 +1,44 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
+import toggleOpen from './decorators/toggleOpen'
 
-export default class CommentList extends Component {
+class CommentList extends Component {
 
-  state = {
-    isOpen: false
-  }
+    static propTypes = {
+        comments: PropTypes.array
+    }
 
-  render() {
+    componentWillMount() {
+        console.log('---', 'mounting')
+    }
 
-    const { comments } = this.props
-    const { isOpen } = this.state
+    componentDidMount() {
+        console.log('---', 'mounted')
+    }
 
-    const buttonState = isOpen ? 'Закрыть' : 'Открыть'
+    componentWillUnmount() {
+        console.log('---', 'unmounting')
+    }
 
-    const commentComponents = isOpen ? comments.map(comment =>
-      <li key={comment.id}><Comment comment = {comment}/></li>) : null
+    getRef = (ref) => {
+        this.containerNode = ref
+    }
 
-    const body = comments ? <div><button onClick = {this.toggleOpen}>{buttonState} комментарии</button><ul>{commentComponents}</ul></div> : <span>no comments</span>
+    render() {
+        const { comments, isOpen, toggleOpen } = this.props
+        if (!comments || !comments.length) return <p>No comments yet</p>
 
-    return (body)
-  }
+        const commentItems = comments.map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
+        const text = isOpen ? 'hide comments' : `show ${comments.length} comments`
+        const body = isOpen && <ul>{commentItems}</ul>
 
-  toggleOpen = ev => {
-      this.setState({
-          isOpen: !this.state.isOpen
-      })
-  }
+        return (
+            <div ref = {this.getRef}>
+                <a href="#" onClick={toggleOpen}>{text}</a>
+                {body}
+            </div>
+        )
+    }
 }
+
+export default toggleOpen(CommentList)
