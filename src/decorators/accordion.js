@@ -1,21 +1,17 @@
-//decorator === HOC Higher order component
-import React from 'react'
+import React, { Component as ReactComponent} from 'react'
 
-export default function accordion(Component) {
-    return class WrappedComponent extends React.Component {
-      state = {
-          openArticleId: false
-      }
+export default (Component) => class Accordion extends ReactComponent {
+    state = {
+        openItemId: null
+    }
 
-        render() {
-            return <Component {...this.props} {...this.state} accordion = {this.accordion}/>
-        }
+    toggleItem = id => ev => this.setState({
+        openItemId: this.isItemOpen(id) ? null : id
+    })
 
-        accordion = id => ev => {
-            this.setState({
-                openArticleId: (id === this.state.openArticleId ? false : id)
-            })
-        }
+    isItemOpen = id => this.state.openItemId == id
 
+    render() {
+        return <Component {...this.props} toggleItem = {this.toggleItem} isItemOpen = {this.isItemOpen}/>
     }
 }
