@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import {connect} from 'react-redux'
 
 class SelectFilter extends Component {
     static propTypes = {
@@ -30,4 +31,6 @@ class SelectFilter extends Component {
     }
 }
 
-export default SelectFilter
+export default connect(state => ({
+  articles: state.articles
+}))(SelectFilter)
