@@ -9,13 +9,9 @@ class SelectFilter extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    state = {
-        selected: null
-    }
-
     render() {
         const { articles } = this.props
-        const { selected } = this.state
+        const { selected } = this.props
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -30,13 +26,14 @@ class SelectFilter extends Component {
     }
 
     handleChange = selected => {
-      this.setState({ selected })
+      const { filterArticle } = this.props
       filterArticle(selected)
     }
 }
 
 export default connect(state => ({
-  articles: state.articles
+  articles: state.articles,
+  selected: state.filters
 }), {
    filterArticle
  })(SelectFilter)

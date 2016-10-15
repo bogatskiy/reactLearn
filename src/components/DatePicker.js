@@ -28,7 +28,6 @@ class DatePicker extends Component {
             </div>
         );
     }
-
 }
 
 export default DatePicker

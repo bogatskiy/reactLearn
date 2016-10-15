@@ -1,5 +1,8 @@
 import { SELECT_ARTICLE } from '../constants'
 
-export default (selected = [], action) => {
-  return selected
+export default (filters = [], action) => {
+  const { type, payload } = action
+
+
+  return type == SELECT_ARTICLE ? payload : filters
 }
