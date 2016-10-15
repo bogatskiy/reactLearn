@@ -13,17 +13,6 @@ class Article extends Component {
         openArticle: PropTypes.func.isRequired
     }
 
-/*
-    shouldComponentUpdate(nextProps, nextState) {
-        return (this.props.isOpen != nextProps.isOpen)
-    }
-
-
-    componentDidUpdate() {
-        console.log('---', findDOMNode(this.refs.commentList))
-    }
-*/
-
     render() {
         const { article, isOpen, openArticle } = this.props
 
