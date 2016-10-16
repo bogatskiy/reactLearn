@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import count from './counter'
 import articles from './articles'
-import filters from './filters'
+import selected from './filters'
+import range from './range'
 
 
 export default combineReducers({
-    articles, count, filters
+    articles, count, selected, range
 })

@@ -27,6 +27,19 @@ class ArticleList extends Component {
     }
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(accordion(ArticleList))
+export default connect(state => {
+  const { articles, selected, range } = state
+
+  const filtered = articles.filter(article => {
+    if (selected.map(select => select.value ).includes(article.id)) {
+      if (Date.parse(article.date) >= Date.parse(range.from) &&
+      Date.parse(article.date) <= Date.parse(range.to)) {
+        return article
+      }
+    } else {
+      return false
+    }
+  })
+  return {articles: filtered}
+
+})(accordion(ArticleList))
