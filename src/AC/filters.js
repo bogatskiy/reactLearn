@@ -1,16 +1,15 @@
-import { SELECT_ARTICLE } from '../constants'
-import { RANGE_DAY } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
 
-export function filterArticle(selected) {
+export function changeDateRange(dateRange) {
     return {
-        type: SELECT_ARTICLE,
-        payload: selected
+        type: CHANGE_DATE_RANGE,
+        payload: { dateRange }
     }
 }
 
-export function rangeDay(range) {
+export function changeSelection(selected) {
     return {
-        type: RANGE_DAY,
-        payload: range
+        type: CHANGE_SELECTION,
+        payload: { selected }
     }
 }

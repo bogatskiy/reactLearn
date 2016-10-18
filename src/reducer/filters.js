@@ -1,8 +1,24 @@
-import { SELECT_ARTICLE } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
+import { Map } from 'immutable'
 
-export default (selected = [], action) => {
-  const { type, payload } = action
+const defaultFilters = new Map({
+    selected: [],
+    dateRange: {
+        from: null,
+        to: null
+    }
+})
 
+export default (filters = defaultFilters, action) => {
+    const { type, payload } = action
 
-  return type == SELECT_ARTICLE ? payload : selected
+    switch (type) {
+        case CHANGE_DATE_RANGE:
+            return filters.set('dateRange', payload.dateRange)
+
+        case CHANGE_SELECTION:
+            return filters.set('selected', payload.selected)
+    }
+
+    return filters
 }
